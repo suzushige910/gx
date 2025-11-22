@@ -98,7 +98,7 @@ jobs:
               echo "🌱 Initial clone"
               cd ..
               rm -rf gx-smartlife-theme
-              git clone https://github.com/suzushige/gx-smartlife-theme.git gx-smartlife-theme
+              git clone https://github.com/suzushige910/gx.git gx-smartlife-theme
               cd gx-smartlife-theme
             else
               echo "🔄 Updating repository"
