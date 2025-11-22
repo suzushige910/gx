@@ -12,7 +12,7 @@ jobs:
       SSH_USER:   ${{ secrets.USERNAME }}
       SSH_HOST:   ${{ secrets.HOST }}
       SSH_PORT:   10022
-      REMOTE_DIR: /home/wpxj308796/suzushige/public_html/wp-content/themes/gx-smartlife-theme
+      REMOTE_DIR: /home/suzushige/qilin-electric.com/public_html/wp-content/themes/gx-smartlife-theme
 
     steps:
       # --- 1. ソース取得 ---
@@ -83,7 +83,7 @@ jobs:
           set -euo pipefail
           ssh deploy-server << 'EOF'
             set -e
-            DEPLOY_DIR="/home/wpxj308796/suzushige/public_html/wp-content/themes/gx-smartlife-theme"
+            DEPLOY_DIR="/home/suzushige/qilin-electric.com/public_html/wp-content/themes/gx-smartlife-theme"
 
             echo "📁 Checking directory..."
             if [ ! -d "$DEPLOY_DIR" ]; then
