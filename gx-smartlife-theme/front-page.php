@@ -71,6 +71,23 @@ get_header();
                         </a>
                     </div>
                 </div>
+
+                <!-- Portable Battery -->
+                <div class="card solution-card">
+                    <div class="card-image">
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/portable-battery.jpg'); ?>"
+                             alt="<?php esc_attr_e('ポータブル電源', 'gx-smartlife'); ?>">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title"><?php esc_html_e('ポータブル電源', 'gx-smartlife'); ?></h3>
+                        <p class="card-excerpt">
+                            <?php esc_html_e('Dabbsson製の高機能ポータブル電源を取り扱い。キャンプや災害対策、オフグリッド電源として幅広く活躍します。', 'gx-smartlife'); ?>
+                        </p>
+                        <a href="<?php echo esc_url(home_url('/premium-battery-technology')); ?>" class="btn">
+                            <?php esc_html_e('詳しく見る', 'gx-smartlife'); ?>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
