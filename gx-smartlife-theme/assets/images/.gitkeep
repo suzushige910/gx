@@ -1,13 +1,22 @@
-# Placeholder for theme images
-# Add your images here:
-# - logo.png
-# - hero-slide-1.jpg
-# - hero-slide-2.jpg
-# - hero-slide-3.jpg
+# Theme images
+# Images downloaded from https://gx-smartlife.com/
+#
+# Hero carousel:
+# - hero-slide-1.png
+# - hero-slide-2.png
+# - hero-slide-3.png
+#
+# Solution cards:
 # - fit-solution.jpg
 # - bcp-solution.jpg
 # - solar-installation.jpg
 # - portable-battery.jpg
+#
+# Portable battery page:
 # - portable-battery-1.jpg
 # - portable-battery-2.jpg
 # - portable-battery-3.jpg
+#
+# Branding:
+# - logo.png
+# - line-qr.png

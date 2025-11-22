@@ -12,7 +12,7 @@
         <div class="swiper-wrapper">
             <!-- Slide 1 -->
             <div class="swiper-slide">
-                <div class="hero-slide" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-slide-1.jpg'); ?>') center/cover;">
+                <div class="hero-slide" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-slide-1.png'); ?>') center/cover;">
                     <div class="hero-content">
                         <h2><?php esc_html_e('卒FIT対策で電気代を削減', 'gx-smartlife'); ?></h2>
                         <p><?php esc_html_e('FIT終了後も太陽光発電を有効活用。蓄電池システムで自家消費を最適化。', 'gx-smartlife'); ?></p>
@@ -25,7 +25,7 @@
 
             <!-- Slide 2 -->
             <div class="swiper-slide">
-                <div class="hero-slide" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-slide-2.jpg'); ?>') center/cover;">
+                <div class="hero-slide" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-slide-2.png'); ?>') center/cover;">
                     <div class="hero-content">
                         <h2><?php esc_html_e('BCP対策で安心の事業継続', 'gx-smartlife'); ?></h2>
                         <p><?php esc_html_e('災害時の停電対策に。企業のBCP計画をサポートする蓄電池システム。', 'gx-smartlife'); ?></p>
@@ -38,7 +38,7 @@
 
             <!-- Slide 3 -->
             <div class="swiper-slide">
-                <div class="hero-slide" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-slide-3.jpg'); ?>') center/cover;">
+                <div class="hero-slide" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-slide-3.png'); ?>') center/cover;">
                     <div class="hero-content">
                         <h2><?php esc_html_e('確かな技術で太陽光発電施工', 'gx-smartlife'); ?></h2>
                         <p><?php esc_html_e('第一種電気工事士による安心・安全な施工。住宅用から産業用まで対応。', 'gx-smartlife'); ?></p>
