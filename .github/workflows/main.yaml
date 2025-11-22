@@ -1,35 +1,43 @@
 name: Deploy
+
 on:
   push:
     branches: [ main ]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     env:
       SSH_USER:   ${{ secrets.USERNAME }}
       SSH_HOST:   ${{ secrets.HOST }}
-      SSH_PORT:   ${{ secrets.SSH_PORT || 10022 }}
-      REMOTE_DIR: "/home/suzushige/qilin-electric.com/public_html/wp-content/themes/gx-smartlife-theme"
-      BRANCH:     main
+      SSH_PORT:   10022
+      REMOTE_DIR: /home/wpxj308796/suzushige/public_html/wp-content/themes/gx-smartlife-theme
+
     steps:
+      # --- 1. ソース取得 ---
       - uses: actions/checkout@v4
-      
-      # 1) 秘密鍵を書き出して ssh-agent に登録
+
+      # --- 2. 秘密鍵のセットアップ ---
       - name: Setup SSH key
         run: |
           set -euo pipefail
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_deploy
-          # Windowsの改行(CR)を削除（CRLF → LF）
-          tr -d '\r' < ~/.ssh/id_deploy > ~/.ssh/id_deploy.clean
-          mv ~/.ssh/id_deploy.clean ~/.ssh/id_deploy
+
+          echo "🔑 Writing private key..."
+          printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_deploy
+
+          # LFに統一
+          tr -d '\r' < ~/.ssh/id_deploy > ~/.ssh/id_clean
+          mv ~/.ssh/id_clean ~/.ssh/id_deploy
+
           chmod 600 ~/.ssh/id_deploy
-          
-          # ssh-agent を起動して鍵を追加
+
+          echo "🔐 Starting ssh-agent"
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_deploy
-          
-          # SSH設定ファイルを作成
+
+          echo "📄 Creating SSH config"
           cat > ~/.ssh/config <<EOF
           Host deploy-server
             HostName $SSH_HOST
@@ -39,51 +47,64 @@ jobs:
             IdentitiesOnly yes
             StrictHostKeyChecking no
           EOF
+
           chmod 600 ~/.ssh/config
-      
-      # 2) known_hosts 登録（オプション）
-      - name: Add known_hosts
+
+      # --- 3. known_hosts 登録 ---
+      - name: Add Server host key
         run: |
-          set -euo pipefail
+          echo "🔍 Fetching host key..."
           ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
-      
-      # 3) SSH 接続テスト
-      - name: Test SSH connection
+
+      # --- 4. SSH キーの指紋確認 ---
+      - name: Show private key fingerprint
         run: |
-          set -euo pipefail
-          # SSH設定を使って接続
-          ssh deploy-server "echo 'SSH OK on $(hostname) at $(date)'"
-      
-      # 4) デプロイ本体
+          echo "===== Local private key fingerprint ====="
+          ssh-keygen -lf ~/.ssh/id_deploy || echo "no key found"
+          echo "========================================"
+
+      # --- 5. SSH 設定内容の表示 ---
+      - name: Show SSH config
+        run: |
+          echo "===== ~/.ssh/config ====="
+          cat ~/.ssh/config
+          echo "=========================="
+
+      # --- 6. SSH 接続テスト（超詳細ログ） ---
+      - name: Test SSH connection (verbose)
+        run: |
+          echo "===== SSH -vvv TEST START ====="
+          ssh -vvv deploy-server "echo 'SSH OK on $(hostname) at $(date)'"
+          echo "===== SSH -vvv TEST END ====="
+
+      # --- 7. ★ 本番デプロイ ★ ---
       - name: Deploy on remote host
         run: |
           set -euo pipefail
-          ssh deploy-server <<'EOF'
+          ssh deploy-server << 'EOF'
             set -e
-            DEPLOY_DIR="/home/suzushige/qilin-electric.com/public_html/wp-content/themes/gx-smartlife-theme"
-            export PATH="/usr/bin:/bin:/usr/local/bin:$PATH"
-            
-            # ディレクトリが存在しない場合は作成
+            DEPLOY_DIR="/home/wpxj308796/suzushige/public_html/wp-content/themes/gx-smartlife-theme"
+
+            echo "📁 Checking directory..."
             if [ ! -d "$DEPLOY_DIR" ]; then
-              echo "Creating directory: $DEPLOY_DIR"
+              echo "Creating $DEPLOY_DIR"
               mkdir -p "$DEPLOY_DIR"
             fi
-            
+
+            echo "📂 Moving into directory"
             cd "$DEPLOY_DIR"
-            
-            # Gitリポジトリが存在しない場合は初回クローン
+
             if [ ! -d ".git" ]; then
-              echo "Initial clone from GitHub..."
+              echo "🌱 Initial clone"
               cd ..
               rm -rf gx-smartlife-theme
               git clone https://github.com/suzushige/gx-smartlife-theme.git gx-smartlife-theme
               cd gx-smartlife-theme
             else
-              # 既存リポジトリの場合は更新
-              echo "Updating existing repository..."
+              echo "🔄 Updating repository"
               git fetch origin
               git reset --hard origin/main
             fi
-            
-            echo "Deployment completed at $(date)"
+
+            echo "🎉 Deployment completed at $(date)"
           EOF
