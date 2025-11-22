@@ -9,7 +9,7 @@ jobs:
       SSH_USER:   ${{ secrets.USERNAME }}
       SSH_HOST:   ${{ secrets.HOST }}
       SSH_PORT:   ${{ secrets.SSH_PORT || 10022 }}
-      REMOTE_DIR: DEPLOY_DIR="/home/suzushige/qilin-electric.com/public_html/wp-content/themes/gx-smartlife-theme"
+      REMOTE_DIR: "/home/suzushige/qilin-electric.com/public_html/wp-content/themes/gx-smartlife-theme"
       BRANCH:     main
     steps:
       - uses: actions/checkout@v4
