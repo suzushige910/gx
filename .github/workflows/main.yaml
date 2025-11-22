@@ -60,7 +60,7 @@ jobs:
           set -euo pipefail
           ssh deploy-server <<'EOF'
             set -e
-            DEPLOY_DIR="/home/wpxj308796/suzushige/public_html/wp-content/themes/gx-smartlife-theme"
+            DEPLOY_DIR="/home/suzushige/suzushige.wpx.jp/public_html/wp-content/themes/gx-smartlife-theme"
             export PATH="/usr/bin:/bin:/usr/local/bin:$PATH"
             
             # ディレクトリが存在しない場合は作成
