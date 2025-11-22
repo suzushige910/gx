@@ -1,5 +1,7 @@
 # GX Smart Life WordPress Theme
 
+[![Deploy](https://github.com/suzushige910/gx/actions/workflows/main.yaml/badge.svg)](https://github.com/suzushige910/gx/actions/workflows/main.yaml)
+
 このリポジトリには、GXスマートライフ株式会社のWordPressテーマが含まれています。
 
 ## 概要
