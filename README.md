@@ -27,8 +27,11 @@ mainブランチへのpushで自動的に本番サーバーにデプロイされ
 
 ## ディレクトリ構成
 
-- `gx-smartlife-theme/` - WordPressテーマ本体
-- `.github/workflows/` - GitHub Actions デプロイメント設定
+```
+gx/
+├── gx-smartlife-theme/  # WordPressテーマ本体
+└── .github/workflows/   # GitHub Actions デプロイメント設定
+```
 
 ## お問い合わせ
 
