@@ -42,4 +42,4 @@ gx/
 
 ---
 
-© 2025 GXスマートライフ株式会社 | Powered by WordPress & GitHub Actions
+© 2025 GXスマートライフ株式会社 | Powered by WordPress & GitHub Actions 🚀
