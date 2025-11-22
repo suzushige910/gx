@@ -23,6 +23,8 @@
 
 mainブランチへのpushで自動的に本番サーバーにデプロイされます。
 
+🚀 **デプロイ先:** WordPress本番環境
+
 ## ディレクトリ構成
 
 - `gx-smartlife-theme/` - WordPressテーマ本体
