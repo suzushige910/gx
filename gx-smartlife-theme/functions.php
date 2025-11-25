@@ -497,3 +497,82 @@ function gx_smartlife_register_installation_examples() {
     register_taxonomy('installation_type', array('installation'), $tax_args);
 }
 add_action('init', 'gx_smartlife_register_installation_examples');
+
+/**
+ * Add custom post type for News Releases
+ */
+function gx_smartlife_register_news_releases() {
+    $labels = array(
+        'name'                  => _x('ニュースリリース', 'Post Type General Name', 'gx-smartlife'),
+        'singular_name'         => _x('ニュースリリース', 'Post Type Singular Name', 'gx-smartlife'),
+        'menu_name'             => __('ニュースリリース', 'gx-smartlife'),
+        'name_admin_bar'        => __('ニュースリリース', 'gx-smartlife'),
+        'archives'              => __('ニュースアーカイブ', 'gx-smartlife'),
+        'attributes'            => __('ニュース属性', 'gx-smartlife'),
+        'all_items'             => __('すべてのニュース', 'gx-smartlife'),
+        'add_new_item'          => __('新しいニュースを追加', 'gx-smartlife'),
+        'add_new'               => __('新規追加', 'gx-smartlife'),
+        'new_item'              => __('新しいニュース', 'gx-smartlife'),
+        'edit_item'             => __('ニュースを編集', 'gx-smartlife'),
+        'update_item'           => __('ニュースを更新', 'gx-smartlife'),
+        'view_item'             => __('ニュースを表示', 'gx-smartlife'),
+        'view_items'            => __('ニュースを表示', 'gx-smartlife'),
+        'search_items'          => __('ニュースを検索', 'gx-smartlife'),
+        'not_found'             => __('ニュースが見つかりません', 'gx-smartlife'),
+        'not_found_in_trash'    => __('ゴミ箱にニュースはありません', 'gx-smartlife'),
+    );
+
+    $args = array(
+        'label'                 => __('ニュースリリース', 'gx-smartlife'),
+        'description'           => __('会社のニュースリリース・プレスリリース', 'gx-smartlife'),
+        'labels'                => $labels,
+        'supports'              => array('title', 'editor', 'thumbnail', 'excerpt', 'author', 'revisions'),
+        'taxonomies'            => array('news_category'),
+        'public'                => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 5,
+        'menu_icon'             => 'dashicons-megaphone',
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => 'news',
+        'exclude_from_search'   => false,
+        'publicly_queryable'    => true,
+        'capability_type'       => 'post',
+        'show_in_rest'          => true,
+        'rewrite'               => array('slug' => 'news', 'with_front' => false),
+    );
+
+    register_post_type('news_release', $args);
+
+    // Register taxonomy for news categories
+    $cat_labels = array(
+        'name'              => _x('ニュースカテゴリー', 'taxonomy general name', 'gx-smartlife'),
+        'singular_name'     => _x('ニュースカテゴリー', 'taxonomy singular name', 'gx-smartlife'),
+        'search_items'      => __('カテゴリーを検索', 'gx-smartlife'),
+        'all_items'         => __('すべてのカテゴリー', 'gx-smartlife'),
+        'parent_item'       => __('親カテゴリー', 'gx-smartlife'),
+        'parent_item_colon' => __('親カテゴリー:', 'gx-smartlife'),
+        'edit_item'         => __('カテゴリーを編集', 'gx-smartlife'),
+        'update_item'       => __('カテゴリーを更新', 'gx-smartlife'),
+        'add_new_item'      => __('新しいカテゴリーを追加', 'gx-smartlife'),
+        'new_item_name'     => __('新しいカテゴリー名', 'gx-smartlife'),
+        'menu_name'         => __('カテゴリー', 'gx-smartlife'),
+    );
+
+    $cat_args = array(
+        'labels'            => $cat_labels,
+        'hierarchical'      => true,
+        'public'            => true,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'show_in_nav_menus' => true,
+        'show_tagcloud'     => false,
+        'show_in_rest'      => true,
+        'rewrite'           => array('slug' => 'news-category'),
+    );
+
+    register_taxonomy('news_category', array('news_release'), $cat_args);
+}
+add_action('init', 'gx_smartlife_register_news_releases');

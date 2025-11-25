@@ -131,31 +131,83 @@ get_header();
         </div>
     </section>
 
-    <!-- Recent Posts Section -->
-    <section class="recent-posts-section mt-4">
+    <!-- Recent News Section -->
+    <section class="recent-news-section mt-4">
         <div class="site-container">
-            <h2 class="section-title text-center"><?php esc_html_e('最新のお知らせ', 'gx-smartlife'); ?></h2>
+            <h2 class="section-title text-center">
+                <i class="fas fa-megaphone"></i>
+                <?php esc_html_e('最新のニュースリリース', 'gx-smartlife'); ?>
+            </h2>
 
             <div class="posts-grid">
                 <?php
-                $recent_posts = new WP_Query(array(
+                $recent_news = new WP_Query(array(
+                    'post_type' => 'news_release',
                     'posts_per_page' => 3,
                     'post_status' => 'publish',
+                    'orderby' => 'date',
+                    'order' => 'DESC',
                 ));
 
-                if ($recent_posts->have_posts()) :
-                    while ($recent_posts->have_posts()) :
-                        $recent_posts->the_post();
-                        get_template_part('template-parts/post-card');
+                if ($recent_news->have_posts()) :
+                    while ($recent_news->have_posts()) :
+                        $recent_news->the_post();
+                        ?>
+                        <article class="post-card news-card">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <div class="post-thumbnail">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <?php the_post_thumbnail('gx-card'); ?>
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                            <div class="post-content">
+                                <?php
+                                $terms = get_the_terms(get_the_ID(), 'news_category');
+                                if ($terms && !is_wp_error($terms)) :
+                                    ?>
+                                    <div class="post-categories">
+                                        <?php foreach ($terms as $term) : ?>
+                                            <span class="category-badge"><?php echo esc_html($term->name); ?></span>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <h3 class="post-title">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <?php the_title(); ?>
+                                    </a>
+                                </h3>
+                                <div class="post-date">
+                                    <i class="fas fa-calendar"></i>
+                                    <?php echo get_the_date('Y年m月d日'); ?>
+                                </div>
+                                <?php if (has_excerpt()) : ?>
+                                    <div class="post-excerpt">
+                                        <?php the_excerpt(); ?>
+                                    </div>
+                                <?php endif; ?>
+                                <a href="<?php the_permalink(); ?>" class="read-more">
+                                    <?php esc_html_e('続きを読む', 'gx-smartlife'); ?>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                        <?php
                     endwhile;
                     wp_reset_postdata();
+                else :
+                    ?>
+                    <p class="no-news"><?php esc_html_e('ニュースリリースはまだありません。', 'gx-smartlife'); ?></p>
+                    <?php
                 endif;
                 ?>
             </div>
 
             <div class="text-center mt-2">
-                <a href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))); ?>" class="btn">
-                    <?php esc_html_e('お知らせ一覧を見る', 'gx-smartlife'); ?>
+                <a href="<?php echo esc_url(get_post_type_archive_link('news_release')); ?>" class="btn">
+                    <i class="fas fa-list"></i>
+                    <?php esc_html_e('ニュース一覧を見る', 'gx-smartlife'); ?>
                 </a>
             </div>
         </div>

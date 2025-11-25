@@ -1134,3 +1134,38 @@ p {
     margin: 0 auto;
   }
 }
+
+/* ==========================================
+   News Release Styles (Front Page)
+   ========================================== */
+.recent-news-section .section-title {
+  color: var(--color-dark-blue);
+  text-shadow: none;
+}
+
+.recent-news-section .section-title i {
+  margin-right: 0.5rem;
+  color: var(--color-primary-blue);
+}
+
+.news-card .post-categories {
+  margin-bottom: 0.5rem;
+}
+
+.news-card .category-badge {
+  display: inline-block;
+  background: #e3f2fd;
+  color: var(--color-primary-blue);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-right: 0.25rem;
+}
+
+.no-news {
+  text-align: center;
+  color: #666;
+  padding: var(--spacing-lg);
+  font-size: 1.05rem;
+}
