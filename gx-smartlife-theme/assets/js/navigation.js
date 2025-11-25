@@ -63,6 +63,25 @@
         }
     });
 
+    // Mobile Dropdown Toggle
+    const menuItemsWithChildren = document.querySelectorAll('.menu-item-has-children');
+
+    menuItemsWithChildren.forEach(item => {
+        const link = item.querySelector('a');
+        if (link) {
+            link.addEventListener('click', function(e) {
+                // Only on mobile (when menu toggle is visible)
+                if (window.innerWidth <= 781) {
+                    const submenu = item.querySelector('.sub-menu');
+                    if (submenu) {
+                        e.preventDefault();
+                        item.classList.toggle('active');
+                    }
+                }
+            });
+        }
+    });
+
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {

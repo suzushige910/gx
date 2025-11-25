@@ -237,18 +237,33 @@ add_action('widgets_init', 'gx_smartlife_register_widgets');
  */
 function gx_smartlife_fallback_menu() {
     echo '<ul id="primary-menu" class="menu">';
-    echo '<li><a href="' . esc_url(home_url('/')) . '">' . esc_html__('トップページ', 'gx-smartlife') . '</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/fit-solution')) . '">' . esc_html__('卒FIT', 'gx-smartlife') . '</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/bcp-solution')) . '">' . esc_html__('BCP対策', 'gx-smartlife') . '</a></li>';
 
+    // ホーム
+    echo '<li class="menu-item"><a href="' . esc_url(home_url('/')) . '"><i class="fas fa-home"></i> ' . esc_html__('ホーム', 'gx-smartlife') . '</a></li>';
+
+    // サービス（ドロップダウン）
+    echo '<li class="menu-item menu-item-has-children">';
+    echo '<a href="#"><i class="fas fa-solar-panel"></i> ' . esc_html__('サービス', 'gx-smartlife') . '</a>';
+    echo '<ul class="sub-menu">';
+    echo '<li><a href="' . esc_url(home_url('/fit-solution')) . '"><i class="fas fa-battery-full"></i> ' . esc_html__('卒FIT対策', 'gx-smartlife') . '</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/bcp-solution')) . '"><i class="fas fa-shield-alt"></i> ' . esc_html__('BCP対策・UPS', 'gx-smartlife') . '</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/installation-examples')) . '"><i class="fas fa-wrench"></i> ' . esc_html__('太陽光発電施工', 'gx-smartlife') . '</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/premium-battery-technology')) . '"><i class="fas fa-plug"></i> ' . esc_html__('ポータブル電源', 'gx-smartlife') . '</a></li>';
+    echo '</ul>';
+    echo '</li>';
+
+    // お知らせ
     $blog_page_id = get_option('page_for_posts');
     if ($blog_page_id) {
-        echo '<li><a href="' . esc_url(get_permalink($blog_page_id)) . '">' . esc_html__('お知らせ', 'gx-smartlife') . '</a></li>';
+        echo '<li class="menu-item"><a href="' . esc_url(get_permalink($blog_page_id)) . '"><i class="fas fa-bell"></i> ' . esc_html__('お知らせ', 'gx-smartlife') . '</a></li>';
     }
 
-    echo '<li><a href="' . esc_url(home_url('/installation-examples')) . '">' . esc_html__('施工例', 'gx-smartlife') . '</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/about')) . '">' . esc_html__('会社概要', 'gx-smartlife') . '</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/contact')) . '">' . esc_html__('問合せ', 'gx-smartlife') . '</a></li>';
+    // 会社情報
+    echo '<li class="menu-item"><a href="' . esc_url(home_url('/about')) . '"><i class="fas fa-building"></i> ' . esc_html__('会社概要', 'gx-smartlife') . '</a></li>';
+
+    // お問い合わせ
+    echo '<li class="menu-item menu-item-cta"><a href="' . esc_url(home_url('/contact')) . '"><i class="fas fa-envelope"></i> ' . esc_html__('お問い合わせ', 'gx-smartlife') . '</a></li>';
+
     echo '</ul>';
 }
 
